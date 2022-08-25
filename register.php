@@ -16,19 +16,20 @@
         $email = $_POST['email'];
         $pw = $_POST['pass'];
         $confirmpw = $_POST['confirmpass'];
-        // if($pw != $confirmpw){
-        //     $error_match = true;
-        // } else if(empty($user) || empty($pw) || empty($email)){
-        //     $error_vacio = true;
-        // } else{
-           $registrar = $coneccion->query("INSERT INTO `user_db`(`id`, `user`, `correo`, `password`) VALUES ('','$user','$email','$pw')");
-           if($registrar){
-            echo "registrado";
+        if($pw != $confirmpw){
+            $error_match = true;
+        } else if(empty($user) || empty($pw) || empty($email)){
+            $error_vacio = true;
+        } else{
+           $registraruser = $coneccion->query("INSERT INTO `user_db`(`user`, `correo`, `password`) VALUES ('$user','$email','$pw')");
+           if($registraruser){
+            header('location: http://localhost/landing/index.php');
+            die();
            } else {
             die("fallo");
            }
         }
-    //}
+    }
     
 
     ?>
@@ -62,7 +63,7 @@
             <input type="email" name="email" class="text-class" placeholder="Ingresa tu correo" require>
             <input type="password" name="pass" class="text-class" placeholder="Introduce tu contraseña" require>
             <input type="password" name="confirmpass" class="text-class" placeholder="Confirma tu contraseña" require>
-            <input type="submit" name="registrar" value="registrar" class="boton-class">
+            <input type="submit" name="registrar" value="Registrar" class="boton-class">
             <a href="login.php">Iniciar sesion.</a>
          </form>
          </div>
